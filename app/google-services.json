@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "335652996529",
+    "project_id": "sam-tasks",
+    "storage_bucket": "sam-tasks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335652996529:android:45daf39a61fc198d9b2990",
+        "android_client_info": {
+          "package_name": "com.silverbullet.samtasks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335652996529-bt057c076nbc685l7il7rsk7tv4tuvan.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.silverbullet.samtasks",
+            "certificate_hash": "97ec1091ee9af9c1405fac33506f861febfc2ef9"
+          }
+        },
+        {
+          "client_id": "335652996529-06hbnpadehfr04v7lk7509da24umcarc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCWjmwNhJG8kXOdF2Ug6l2L4r2NRBJzX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "335652996529-06hbnpadehfr04v7lk7509da24umcarc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
