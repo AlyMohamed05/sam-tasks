@@ -10,8 +10,7 @@ class SamTasksApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
+        // TODO: remove the debug tree in release mode
+        Timber.plant(Timber.DebugTree())
     }
 }
