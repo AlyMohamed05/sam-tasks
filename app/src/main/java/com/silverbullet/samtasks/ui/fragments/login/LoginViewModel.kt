@@ -2,6 +2,7 @@ package com.silverbullet.samtasks.ui.fragments.login
 
 import android.annotation.SuppressLint
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,6 +28,10 @@ class LoginViewModel @Inject constructor(
     val email = MutableLiveData("")
     val password = MutableLiveData("")
 
+    private val _startGoogleSignIn = MutableLiveData(false)
+    val startGoogleSignIn: LiveData<Boolean>
+        get() = _startGoogleSignIn
+
 
     init {
         initFormValidator(context, ignoreName = true)
@@ -42,7 +47,11 @@ class LoginViewModel @Inject constructor(
     }
 
     fun continueWithGoogle() {
-        // TODO : Implement this
+        _startGoogleSignIn.value = true
+    }
+
+    fun resetGoogleSignInRequest() {
+        _startGoogleSignIn.value = false
     }
 
     fun continueWithoutLogin() {

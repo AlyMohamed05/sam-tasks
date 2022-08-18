@@ -2,6 +2,8 @@
 
     <string name="app_name">SAM Tasks</string>
 
+    <string name="webclient_id">335652996529-bt057c076nbc685l7il7rsk7tv4tuvan.apps.googleusercontent.com</string>
+
     <!--    Login Fragment-->
     <string name="login">Login</string>
     <string name="email_hint">Email</string>

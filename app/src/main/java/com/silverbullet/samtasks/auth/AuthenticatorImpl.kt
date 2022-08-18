@@ -1,5 +1,8 @@
 package com.silverbullet.samtasks.auth
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.silverbullet.samtasks.data.models.User
@@ -17,8 +20,9 @@ class AuthenticatorImpl : Authenticator {
     override val user: User?
         get() = firebaseUser?.toUser()
 
-    override val isSignedIn: Boolean
-        get() = user != null
+    private val _isSignedIn = MutableLiveData<Boolean>(user == null)
+    override val isSignedIn: LiveData<Boolean>
+        get() = _isSignedIn
 
     override suspend fun createNewUser(
         name: String,
@@ -28,6 +32,7 @@ class AuthenticatorImpl : Authenticator {
         return try {
             val task = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             firebaseUser = task.user
+            _isSignedIn.value = true
             SignupResult.SUCCESS
         } catch (e: FirebaseException) {
             if (e is FirebaseAuthUserCollisionException) {
@@ -46,6 +51,7 @@ class AuthenticatorImpl : Authenticator {
         return try {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             firebaseUser = result.user
+            _isSignedIn.value = true
             LoginResult.SUCCESS
         } catch (e: FirebaseException) {
             if (e is FirebaseAuthInvalidUserException || e is FirebaseAuthInvalidCredentialsException) {
@@ -53,6 +59,19 @@ class AuthenticatorImpl : Authenticator {
             } else {
                 LoginResult.UNKNOWN_ERROR
             }
+        } catch (e: Exception) {
+            Timber.d(e)
+            LoginResult.UNKNOWN_ERROR
+        }
+    }
+
+    override suspend fun loginWithCredentials(account: GoogleSignInAccount): LoginResult {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        return try {
+            val result = firebaseAuth.signInWithCredential(credential).await()
+            firebaseUser = result.user
+            _isSignedIn.value = true
+            LoginResult.SUCCESS
         } catch (e: Exception) {
             Timber.d(e)
             LoginResult.UNKNOWN_ERROR

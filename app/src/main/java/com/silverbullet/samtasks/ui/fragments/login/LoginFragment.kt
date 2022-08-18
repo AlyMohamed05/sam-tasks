@@ -10,8 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.silverbullet.samtasks.databinding.LoginFragmentBinding
+import com.silverbullet.samtasks.ui.activities.auth.AuthActivity
 import com.silverbullet.samtasks.utils.errorMessage
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -61,6 +63,15 @@ class LoginFragment : Fragment() {
         loginViewModel.passwordError.observe(
             viewLifecycleOwner,
             Observer { binding.passwordEdit.errorMessage(it) }
+        )
+        loginViewModel.startGoogleSignIn.observe(
+            viewLifecycleOwner,
+            Observer { shouldSignInWithGoogle->
+                if(shouldSignInWithGoogle){
+                    loginViewModel.resetGoogleSignInRequest()
+                    (activity as AuthActivity).signInWithGoogle()
+                }
+            }
         )
     }
 }
