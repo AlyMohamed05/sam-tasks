@@ -15,7 +15,7 @@
         app:layout_constraintGuide_percent="@dimen/auth_screen_guide_percent" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment"
+        android:id="@+id/auth_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"

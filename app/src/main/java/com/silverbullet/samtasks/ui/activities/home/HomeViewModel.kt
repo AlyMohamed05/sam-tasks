@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
 
     private fun fakeLoading() {
         viewModelScope.launch {
-            delay(1000L)
+            delay(500L)
             _accountState.value = AccountState.Authenticate
         }
     }

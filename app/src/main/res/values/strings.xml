@@ -16,4 +16,9 @@
     <string name="name_hint">Name</string>
     <string name="back">Back to login</string>
 
+    <!--    Fields error messages-->
+    <string name="empty_field">This field can\'t be empty</string>
+    <string name="email_not_valid">Please enter a valid email</string>
+    <string name="password_too_short">Password can\'t be less that 8 chars</string>
+
 </resources>

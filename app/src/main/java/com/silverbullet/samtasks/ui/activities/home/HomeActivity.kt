@@ -21,6 +21,12 @@ class HomeActivity : AppCompatActivity() {
             setKeepOnScreenCondition {
                 shouldShowSplashScreen()
             }
+            setOnExitAnimationListener {
+                Intent(this@HomeActivity, AuthActivity::class.java).apply {
+                    startActivity(this)
+                    finish()
+                }
+            }
         }
         setContentView(R.layout.activity_home)
     }
@@ -29,19 +35,13 @@ class HomeActivity : AppCompatActivity() {
      * returns the condition to decide whether to show splash screen or not.
      * if user should authenticate it will navigate to Auth Activity.
      */
-    private fun shouldShowSplashScreen(): Boolean{
+    private fun shouldShowSplashScreen(): Boolean {
         return when (homeViewModel.accountState.value!!) {
             AccountState.Loading -> true
             AccountState.LoggedIn -> false
             AccountState.Anonymous -> false
-            AccountState.Authenticate -> {
-                Intent(this@HomeActivity, AuthActivity::class.java).apply {
-                    startActivity(this)
-                    finish()
-                }
-                // keep splash to avoid interrupting new activity animation
-                true
-            }
+            AccountState.Authenticate -> false
+
         }
     }
 }
